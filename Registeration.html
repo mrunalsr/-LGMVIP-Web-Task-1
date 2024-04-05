@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: calc(100% - 20px);
+        padding: 8px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+    }
+    input[type="radio"], input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #output {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Registration Form</h2>
+    <div id="output"></div>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <label><input type="radio" name="gender" value="male"> Male</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+            <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+        <div class="form-group">
+            <label>Select Courses</label>
+            <label><input type="checkbox" name="courses" value="html-css"> HTML & CSS</label>
+            <label><input type="checkbox" name="courses" value="javascript"> JavaScript</label>
+            <label><input type="checkbox" name="courses" value="python"> Python</label>
+        </div>
+        <div class="form-group">
+            <label for="birthdate">Birthdate</label>
+            <input type="date" id="birthdate" name="birthdate">
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="4"></textarea>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const output = document.getElementById('output');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : 'Not specified';
+        const courses = Array.from(document.querySelectorAll('input[name="courses"]:checked')).map(course => course.value).join(', ');
+        const birthdate = document.getElementById('birthdate').value;
+        const address = document.getElementById('address').value;
+
+        const userData = `
+            <p><strong>Full Name:</strong> ${fullName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Password:</strong> ${password}</p>
+            <p><strong>Gender:</strong> ${gender}</p>
+            <p><strong>Courses:</strong> ${courses}</p>
+            <p><strong>Birthdate:</strong> ${birthdate}</p>
+            <p><strong>Address:</strong> ${address}</p>
+        `;
+
+        output.innerHTML = userData;
+    });
+</script>
+</body>
+</html>
